@@ -1,7 +1,5 @@
 import pytest
 
-import pytest
-
 
 class TestCase:
     def __init__(self):

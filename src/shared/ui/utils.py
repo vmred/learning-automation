@@ -6,6 +6,7 @@ import time
 from selene.support.conditions import be
 from selene.support.conditions.be import visible
 from selene.support.jquery_style_selectors import s, ss
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
 from src.shared.ui.cfg import browser
 from src.shared.ui.cfg import timeout as tm
@@ -31,7 +32,18 @@ def js_ready():
 
 def _is_element_or_locator(element_or_locator, is_collection=False):
     if type(element_or_locator) is str:
-        return s(element_or_locator) if not is_collection else ss(element_or_locator)
+        func = ss if is_collection else s
+        return func(element_or_locator)
+    return element_or_locator
+
+
+def is_element_displayed(element, is_collection=None, timeout=4):
+    try:
+        func = ss if is_collection else s
+        func(element).should_be(visible, timeout=timeout)
+        return True
+    except (NoSuchElementException, TimeoutException):
+        return False
 
 
 def _is_selene_element_or_webelement(element):
