@@ -39,6 +39,10 @@ def _is_element_or_locator(element_or_locator, is_collection=False):
 
 def is_element_displayed(element, is_collection=None, timeout=4):
     try:
+        # passing SeleneElement or other Element, not locator
+        if type(element) != 'str':
+            element = element.__str__()
+
         func = ss if is_collection else s
         func(element).should_be(visible, timeout=timeout)
         return True
@@ -69,7 +73,7 @@ def scroll_to_element_to_be_in_view(element):
                            _is_selene_element_or_webelement(element))
 
 
-def get_all_element_attributes(element):
+def get_element_attributes(element):
     return browser.execute_script(
         'var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) {'
         ' items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value '
@@ -78,7 +82,7 @@ def get_all_element_attributes(element):
 
 
 def element_is_clickable(element):
-    attrs = get_all_element_attributes(element)
+    attrs = get_element_attributes(element)
     return not any(x in not_clickable_overlays for x in attrs.values())
 
 
