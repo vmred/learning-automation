@@ -7,9 +7,11 @@ from selene.support.conditions import be
 from selene.support.conditions.be import visible
 from selene.support.jquery_style_selectors import s, ss
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver import ActionChains
 
 from src.shared.ui.cfg import browser
 from src.shared.ui.cfg import timeout as tm
+from tests.ui.conftest import driver
 
 log = logging.getLogger()
 
@@ -79,6 +81,14 @@ def get_element_attributes(element):
         ' items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value '
         '}; '
         'return items;', _is_selene_element_or_webelement(element))
+
+
+def switch_to_frame(frame):
+    driver.switch_to_frame(frame.get_actual_webelement())
+
+
+def drag_n_drop(element, drag_to):
+    ActionChains(driver).drag_and_drop(element.get_actual_webelement(), drag_to.get_actual_webelement()).perform()
 
 
 def element_is_clickable(element):
