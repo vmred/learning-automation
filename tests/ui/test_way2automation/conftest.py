@@ -26,7 +26,6 @@ def login():
 @pytest.fixture
 def droppable_page(home_page):
     dp = DroppablePage()
-    log.info(dp.page_content)
 
     if not is_element_displayed(dp.page_content, timeout=0):
         home_page.droppable_page_link.click()
