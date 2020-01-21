@@ -11,8 +11,7 @@ class TestCase:
 
     def verify(self, actual, expected, message=''):
         if actual != expected:
-            self._fail += f'Fail! Actual result: {actual} not equal to expected: {expected}, ' \
-                          f'message: {message if message else "Empty"} \n'
+            self._fail += f'Actual result: {actual} not equal to expected: {expected}, message: {message or "Empty"} \n'
 
     def is_failed(self):
         if self.fail:
