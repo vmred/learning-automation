@@ -9,9 +9,10 @@ class TestCase:
     def fail(self):
         return self._fail
 
-    def verify(self, actual, expected):
+    def verify(self, actual, expected, message=''):
         if actual != expected:
-            self._fail += f'Fail! Actual result: {actual} not equal to expected: {expected}'
+            self._fail += f'Fail! Actual result: {actual} not equal to expected: {expected}, ' \
+                          f'message: {message if message else "Empty"} \n'
 
     def is_failed(self):
         if self.fail:

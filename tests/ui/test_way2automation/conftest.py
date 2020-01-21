@@ -3,7 +3,8 @@ import pytest
 from src.services.way2automation.forms.registration import RegistrationForm
 from src.services.way2automation.pages.droppable_page import DroppablePage
 from src.services.way2automation.pages.home_page import HomePage
-from src.shared.ui.utils import wait_until_element_is_visible, log, wait, wait_until_element_not_visible
+from src.shared.ui.utils import wait_until_element_is_visible, log, wait_until_element_not_visible, \
+    is_element_displayed
 
 
 @pytest.fixture
@@ -24,5 +25,10 @@ def login():
 
 @pytest.fixture
 def droppable_page(home_page):
-    home_page.droppable_page_link.click()
-    return DroppablePage()
+    dp = DroppablePage()
+    log.info(dp.page_content)
+
+    if not is_element_displayed(dp.page_content, timeout=0):
+        home_page.droppable_page_link.click()
+
+    return dp
