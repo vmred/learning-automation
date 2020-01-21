@@ -88,7 +88,11 @@ def switch_to_frame(frame):
 
 
 def drag_n_drop(element, drag_to):
-    ActionChains(driver).drag_and_drop(element.get_actual_webelement(), drag_to.get_actual_webelement()).perform()
+    actions = ActionChains(driver)
+    if type(drag_to) == list:
+        actions.drag_and_drop_by_offset(element.get_actual_webelement(), drag_to[0], drag_to[1]).perform()
+    else:
+        actions.drag_and_drop(element.get_actual_webelement(), drag_to.get_actual_webelement()).perform()
 
 
 def element_is_clickable(element):
