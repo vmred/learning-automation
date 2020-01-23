@@ -2,15 +2,15 @@ from selene.conditions import visible
 from selene.support.jquery_style_selectors import s
 
 from src.shared.ui import cfg
-from src.shared.ui.utils import wait_until_element_not_visible, log
+from src.shared.ui.utils import wait_until_element_not_visible, log, is_element_displayed
 
 
 class BasePage:
 
     def __init__(self, url):
         self._url = url
-        self._browser = cfg.browser
-        self._driver = self._browser.driver()
+        self.browser = cfg.browser
+        self.driver = self.browser.driver()
         self._page_content = None
         self._page_loader = None
 
@@ -23,7 +23,7 @@ class BasePage:
         return s(self._page_loader)
 
     def open(self):
-        self._browser.open_url(self._url)
+        self.browser.open_url(self._url)
         self.wait_until_page_loaded()
         return self
 
@@ -36,3 +36,6 @@ class BasePage:
     def wait_until_loader_completed(self):
         if self._page_loader:
             wait_until_element_not_visible(self.page_loader)
+
+    def is_current_page(self):
+        return is_element_displayed(self.page_content, timeout=0.4)
