@@ -4,7 +4,6 @@ from random import random
 import time
 
 from selene.support.conditions import be
-from selene.support.conditions.be import visible
 from selene.support.jquery_style_selectors import s, ss
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver import ActionChains
@@ -39,14 +38,9 @@ def _is_element_or_locator(element_or_locator, is_collection=False):
     return element_or_locator
 
 
-def is_element_displayed(element, is_collection=None, timeout=4):
+def is_element_displayed(element, timeout=4):
     try:
-        # passing SeleneElement or other Element, not locator
-        if type(element) != 'str':
-            element = element.__str__()
-
-        func = ss if is_collection else s
-        func(element).should_be(visible, timeout=timeout)
+        element.should(be.visible, timeout=timeout)
         return True
     except (NoSuchElementException, TimeoutException):
         return False
@@ -59,11 +53,11 @@ def _is_selene_element_or_webelement(element):
 
 
 def wait_until_element_not_visible(element, is_collection=False, timeout=tm):
-    _is_element_or_locator(element, is_collection).should_not_be(visible, timeout)
+    _is_element_or_locator(element, is_collection).should_not(be.visible, timeout)
 
 
 def wait_until_element_is_visible(element, is_collection=False, timeout=tm):
-    _is_element_or_locator(element, is_collection).should_be(visible, timeout)
+    _is_element_or_locator(element, is_collection).should(be.visible, timeout)
 
 
 def is_element_is_present(element, is_collection=False, timeout=tm):
