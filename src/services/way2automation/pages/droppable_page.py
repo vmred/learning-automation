@@ -16,9 +16,10 @@ class DroppablePage(BasePage):
 
     default_tab = tabs[0]
     default_functionality_frame = s('iframe[src="droppable/default.html"]')
-    default_tab_draggable = draggable_elements[0]
-    default_tab_droppable = droppable_elements[0]
-    accept_tab_draggable = draggable_elements[1]
-    accept_tab_draggable_invalid = s('div[id="draggable-nonvalid"]')
-    accept_tab_droppable = droppable_elements[1]
+    default_tab_drag_from = draggable_elements[0]
+    default_tab_drop_to = droppable_elements[0]
+    accept_tab_frame = s('iframe[src="droppable/default2.html"]')
+    accept_tab_drag_from = draggable_elements[1]
+    accept_tab_drag_from_not_valid = s('div[id="draggable-nonvalid"]')
+    accept_tab_drop_to = droppable_elements[1]
     accept_tab = tabs[1]
