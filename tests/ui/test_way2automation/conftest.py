@@ -29,11 +29,7 @@ def droppable_page(home_page):
 
 @pytest.fixture
 def accept_tab_droppable_page(droppable_page):
-    attrs = get_element_attributes(droppable_page.accept_tab)
-    if attrs and attrs.get('class') == 'active':
-        droppable_page.driver.refresh()
-        droppable_page.accept_tab.click()
-    else:
-        droppable_page.accept_tab.click()
+    droppable_page.driver.refresh()
+    droppable_page.accept_tab.click()
 
-    return droppable_page
+    return DroppablePage()
