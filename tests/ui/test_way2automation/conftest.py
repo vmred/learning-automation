@@ -3,7 +3,7 @@ import pytest
 from src.services.way2automation.forms.registration import RegistrationForm
 from src.services.way2automation.pages.droppable_page import DroppablePage
 from src.services.way2automation.pages.home_page import HomePage
-from src.shared.ui.utils import wait_until_element_is_visible, log, get_element_attributes
+from src.shared.ui.utils import wait_until_element_is_visible, log
 
 
 @pytest.fixture
