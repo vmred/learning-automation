@@ -32,8 +32,6 @@ class TestDroppablePage:
 
     def test_verify_accept_tab_not_droppable_element(self, test_case, accept_tab_droppable_page):
         switch_to_frame(accept_tab_droppable_page.accept_tab_frame)
-        log.info([x for x in accept_tab_droppable_page.droppable_elements])
-        log.info([x for x in accept_tab_droppable_page.draggable_elements])
         text_before = accept_tab_droppable_page.drop_to.text
         drag_n_drop(accept_tab_droppable_page.accept_tab_drag_from_not_valid, accept_tab_droppable_page.drop_to)
         text_after = accept_tab_droppable_page.drop_to.text
