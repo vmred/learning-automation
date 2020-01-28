@@ -1,4 +1,6 @@
 pytest==3.7.0
 selene==1.0.0a16
 pytest-xdist==1.22.5
+pytest-allure-adaptor==1.7.10
+pytest-html==1.22.1
 requests
