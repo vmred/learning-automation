@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        h1 {
+            color: red
+        }
+
+    </style>
+
+</head>
+<body>
+<h1 id="outside">H1 text</h1>
+
+<div id="element">
+    <script>
+        (function (){
+            var root = element.attachShadow( { mode: "open" } );
+
+            var h1 = document.createElement( "h1" );
+            h1.textContent = "Inside Shadow DOM"
+            h1.id = "inside"
+            root.appendChild( h1 );
+
+            var input1 = document.createElement( "input" );
+            input1.id = "shadowInput"
+            root.appendChild( input1 );
+
+        })()
+    </script>
+
+</div>
+
+</body>
+</html>
