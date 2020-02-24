@@ -3,7 +3,7 @@ import string
 from random import random
 import time
 
-from selene.support.conditions import be
+from selene.support.conditions import be, have
 from selene.support.jquery_style_selectors import s, ss
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver import ActionChains
@@ -28,7 +28,7 @@ def remove_focus_from_element(element):
 
 
 def js_ready():
-    return browser.execute_script('return document.readyState == "complete"')
+    return browser.wait_to(have.js_returned_true('return document.readyState == "complete"'))
 
 
 def _is_element_or_locator(element_or_locator, is_collection=False):
