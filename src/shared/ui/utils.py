@@ -23,6 +23,22 @@ def wait(seconds):
     time.sleep(seconds)
 
 
+def is_element_in_view(element):
+    return browser.execute_script(
+        '''
+        var elem = arguments[0];
+        box = elem.getBoundingClientRect();
+        cx = box.left + box.width / 2;
+        cy = box.top + box.height / 2;
+        e = document.elementFromPoint(cx, cy);
+        for (; e; e = e.parentElement) {         
+            if (e === elem)                        
+                return true;                         
+        }                                        
+        return false;          
+        ''', element.get_actual_webelement())
+
+
 def remove_focus_from_element(element):
     browser.execute_script(f'document.querySelector("{element}").blur();')
 
